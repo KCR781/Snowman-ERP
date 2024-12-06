@@ -1,0 +1,1 @@
+Projeto de gerenciamento de usuários com operações CRUD, utilizando Spring Boot e banco de dados MySQL em Docker. O sistema realiza cadastro, atualização, leitura e exclusão de usuários, sendo parte de um projeto interdisciplinar envolvendo Banco de Dados, Linguagem de Programação I, Engenharia de Software e Gestão de Equipes.
