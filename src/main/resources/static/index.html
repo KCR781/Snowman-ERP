@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Usuário</title>
+</head>
+<body>
+
+<!-- cria usuário -->
+<h1>Criar Novo Usuário</h1>
+<form id="createUserForm">
+    <label for="username">Nome de Usuário:</label>
+    <input type="text" id="username" name="username" required>
+    <br><br>
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required>
+    <br><br>
+
+    <label for="password">Senha:</label>
+    <input type="text" id="password" name="password" required>
+    <br><br>
+
+    <button type="button" onclick="createUser()">Criar Usuário</button>
+</form>
+<!-- atualiza usuário -->
+<h1>Atualizar Usuário</h1>
+<form id="updateUserForm">
+    <label for="userId">ID do Usuário:</label>
+    <input type="text" id="userId" name="userId" required>
+    <br><br>
+
+    <label for="newUsername">Novo Nome de Usuário:</label>
+    <input type="text" id="newUsername" name="newUsername" required>
+    <br><br>
+
+    <label for="newPassword">Nova Senha:</label>
+    <input type="password" id="newPassword" name="newPassword" required>
+    <br><br>
+
+    <button type="button" onclick="updateUser()">Atualizar Usuário</button>
+</form>
+<div id="updateResponseMessage"></div>
+<!-- deleta usuário -->
+<h1>Excluir Usuário</h1>
+<form id="deleteUserForm">
+    <label for="deleteUserId">ID do Usuário a Ser Excluído:</label>
+    <input type="text" id="deleteUserId" name="deleteUserId" required>
+    <br><br>
+
+    <button type="button" onclick="deleteUser()">Excluir Usuário</button>
+</form>
+
+<div id="deleteResponseMessage"></div>
+
+<script>
+    async function deleteUser() {
+        const userId = document.getElementById("deleteUserId").value;
+
+        try {
+            const response = await fetch(`http://localhost:8080/v1/users/${userId}`, {
+                method: "DELETE",
+            });
+
+            if (response.ok) {
+                document.getElementById("deleteResponseMessage").innerText = "Usuário excluído com sucesso!";
+            } else {
+                document.getElementById("deleteResponseMessage").innerText = "Erro ao excluir usuário.";
+            }
+        } catch (error) {
+            document.getElementById("deleteResponseMessage").innerText = "Erro de rede ou servidor.";
+        }
+    }
+</script>
+
+<script>
+    async function updateUser() {
+        const userId = document.getElementById("userId").value;
+        const newUsername = document.getElementById("newUsername").value;
+        const newPassword = document.getElementById("newPassword").value;
+
+        const userDto = {
+            username: newUsername,
+            password: newPassword
+        };
+
+        try {
+            const response = await fetch(`http://localhost:8080/v1/users/${userId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userDto)
+            });
+
+            if (response.ok) {
+                document.getElementById("updateResponseMessage").innerText = "Usuário atualizado com sucesso!";
+            } else {
+                document.getElementById("updateResponseMessage").innerText = "Erro ao atualizar usuário.";
+            }
+        } catch (error) {
+            document.getElementById("updateResponseMessage").innerText = "Erro de rede ou servidor.";
+        }
+    }
+</script>
+
+<div id="responseMessage"></div>
+
+<script>
+    async function createUser() {
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("password").value;
+
+        const userDto = {
+            username: username,
+            email: email,
+            password: senha
+        };
+
+        try {
+            const response = await fetch("http://localhost:8080/v1/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userDto)
+            });
+
+            if (response.ok) {
+                document.getElementById("responseMessage").innerText = "Usuário criado com sucesso!";
+            } else {
+                document.getElementById("responseMessage").innerText = "Erro ao criar usuário.";
+            }
+        } catch (error) {
+            document.getElementById("responseMessage").innerText = "Erro de rede ou servidor.";
+        }
+    }
+</script>
+</body>
+</html>
