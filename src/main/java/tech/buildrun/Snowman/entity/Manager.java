@@ -1,6 +1,8 @@
 package tech.buildrun.Snowman.entity;
 import jakarta.persistence.*;
 import java.util.UUID;
+import java.util.List;
+import tech.buildrun.Snowman.entity.User;
 @Entity
 @Table(name = "tb_managers")
 public class Manager {
@@ -13,6 +15,9 @@ public class Manager {
     private String email;
     @Column(name = "password")
     private String password;
+    @OneToMany(mappedBy = "manager")
+    private List<User> users;
+
     public Manager() {
     }
     public Manager(UUID managerId, String username, String email, String password) {
