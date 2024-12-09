@@ -55,7 +55,7 @@ Git:
 Clone o repositório para sua máquina local:
 
 ```bash
-git clone https://github.com/KCR81/Snowman-ERP.git
+git clone https://github.com/KCR81/Snowman-ERP
 cd Snowman-ERP
 ```
 
@@ -72,13 +72,12 @@ docker-compose up -d
 Acesse o diretório backend e execute o projeto Spring Boot:
 
 ```bash
-cd backend
 mvn spring-boot:run
 ```
 
 ### 4. Abrir o Frontend
 
-Abra o arquivo index.html localizado na pasta /frontend/static diretamente no navegador ou hospede em um servidor local.
+Abra o arquivo index.html localizado na pasta \Snowman-ERP2\src\main\resources\static diretamente no navegador ou hospede em um servidor local.
 Estrutura do Banco de Dados
 
     tb_users: Gerencia os dados de usuários.
