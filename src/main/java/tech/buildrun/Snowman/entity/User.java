@@ -20,6 +20,9 @@ public class User {
     private Instant creationTimestamp;
     @UpdateTimestamp
     private Instant updateTimestamp;
+    @ManyToOne
+    @JoinColumn(name = "manager_Id")
+    private Manager manager;
     public User() {
     }
     public User(UUID userId, String username, String email, String password, Instant creationTimestamp, Instant updateTimestamp) {
