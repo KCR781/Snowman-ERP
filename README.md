@@ -55,7 +55,7 @@ Git:
 Clone o repositório para sua máquina local:
 
 ```bash
-git clone https://github.com/seu-usuario/Snowman-ERP.git
+git clone https://github.com/KCR81/Snowman-ERP.git
 cd Snowman-ERP
 ```
 
