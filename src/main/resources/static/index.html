@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Usuário</title>
+    <title>Gestão de Usuários</title>
 </head>
 <body>
 
@@ -25,6 +25,7 @@
 
     <button type="button" onclick="createUser()">Criar Usuário</button>
 </form>
+
 <!-- atualiza usuário -->
 <h1>Atualizar Usuário</h1>
 <form id="updateUserForm">
@@ -43,6 +44,7 @@
     <button type="button" onclick="updateUser()">Atualizar Usuário</button>
 </form>
 <div id="updateResponseMessage"></div>
+
 <!-- deleta usuário -->
 <h1>Excluir Usuário</h1>
 <form id="deleteUserForm">
@@ -55,12 +57,14 @@
 
 <div id="deleteResponseMessage"></div>
 
+<script src="config.js"></script>
+
 <script>
     async function deleteUser() {
         const userId = document.getElementById("deleteUserId").value;
 
         try {
-            const response = await fetch(`http://localhost:8080/v1/users/${userId}`, {
+            const response = await fetch(`${API_URL}/users/${userId}`, {
                 method: "DELETE",
             });
 
@@ -73,9 +77,7 @@
             document.getElementById("deleteResponseMessage").innerText = "Erro de rede ou servidor.";
         }
     }
-</script>
 
-<script>
     async function updateUser() {
         const userId = document.getElementById("userId").value;
         const newUsername = document.getElementById("newUsername").value;
@@ -87,7 +89,7 @@
         };
 
         try {
-            const response = await fetch(`http://localhost:8080/v1/users/${userId}`, {
+            const response = await fetch(`${API_URL}/users/${userId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -104,11 +106,7 @@
             document.getElementById("updateResponseMessage").innerText = "Erro de rede ou servidor.";
         }
     }
-</script>
 
-<div id="responseMessage"></div>
-
-<script>
     async function createUser() {
         const username = document.getElementById("username").value;
         const email = document.getElementById("email").value;
@@ -121,7 +119,7 @@
         };
 
         try {
-            const response = await fetch("http://localhost:8080/v1/users", {
+            const response = await fetch(`${API_URL}/users`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -139,5 +137,7 @@
         }
     }
 </script>
+
+<div id="responseMessage"></div>
 </body>
 </html>
