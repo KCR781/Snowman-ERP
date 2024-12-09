@@ -83,6 +83,10 @@ mvn spring-boot:run
 Abra o arquivo index.html localizado na pasta \Snowman-ERP2\src\main\resources\static diretamente no navegador ou hospede em um servidor local.
 Estrutura do Banco de Dados
 
+```bash
+start http://localhost:8080/index.html
+```
+
     tb_users: Gerencia os dados de usuários.
     tb_managers: Gerencia os administradores do sistema.
     tb_manager_user_actions: Registra as ações realizadas pelos administradores nos usuários.
