@@ -56,8 +56,8 @@ Clone o repositório para sua máquina local:
 
 ```bash
 git clone https://github.com/KCR781/Snowman-ERP
-
-cd Snowman-ERP
+```
+```cd Snowman-ERP
 ```
 
 ### 2. Configurar o Banco de Dados
