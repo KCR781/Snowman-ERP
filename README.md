@@ -1,60 +1,60 @@
 > 🇧🇷 Leia este documento em [Português](README.pt-br.md)
 
-# Sistema Snowman - Gestão de Usuários e Administração
 
-Este projeto é um sistema web desenvolvido para gerenciar usuários e administradores (managers). Foi implementado com Spring Boot no backend e HTML/CSS/JavaScript no frontend, oferecendo funcionalidades básicas de CRUD (Create, Read, Update, Delete).
-## Funcionalidades
+# Snowman System - User and Admin Management
 
-- **Gestão de Usuários**:
-  - Cadastro, edição e exclusão de usuários.
-  - Listagem detalhada de todos os usuários registrados.
-  - Visualização individual de informações do usuário.
+This project is a web application developed to manage users and administrators (managers). It was implemented using Spring Boot for the backend and HTML/CSS/JavaScript for the frontend, offering basic CRUD (Create, Read, Update, Delete) functionality.
 
-- **Gestão de Administradores (Managers)**:
-  - Cadastro e gerenciamento de administradores.
-  - Controle de permissões para ações específicas, como deletar ou atualizar usuários.
+## Features
 
-  - **Rastreamento de Ações**:
-        Registro de ações executadas por administradores em usuários, como atualizações e exclusões.
+- **User Management**:
+  - Register, edit, and delete users.
+  - Detailed listing of all registered users.
+  - View individual user information.
 
-  - **Banco de Dados**:
-        Modelagem relacional implementada com MySQL.
-        Relacionamento entre administradores e usuários para ações registradas.
+- **Admin (Manager) Management**:
+  - Register and manage administrators.
+  - Permission control for specific actions like deleting or updating users.
 
-  - **Responsividade e Usabilidade**:
-    
-    - Interface web funcional e amigável para interagir com o sistema.
-    - Scripts SQL para inserção, atualização e exclusão de registros.
+- **Action Tracking**:
+  - Logs of actions performed by admins on users, such as updates and deletions.
 
-## Tecnologias Utilizadas
+- **Database**:
+  - Relational modeling implemented with MySQL.
+  - Relationships between admins and users for action tracking.
 
-Backend:
-    
-  - **Spring Boot**: Framework para construção de APIs REST.
-  - **Hibernate/JPA**: Persistência de dados e mapeamento objeto-relacional.
-  - **MySQL**: Banco de dados relacional.
+- **Responsiveness and Usability**:
+  - Functional and user-friendly web interface to interact with the system.
+  - SQL scripts for inserting, updating, and deleting records.
 
-Frontend:
-  - **HTML/CSS/JavaScript**: Construção da interface do usuário.
-  - **Fetch API**: Comunicação assíncrona com o backend.
+## Technologies Used
 
-Docker:
-  - **Contêiner para o banco de dados MySQL**, configurado via Docker Compose.
+**Backend**:
+- **Spring Boot**: Framework for building REST APIs.
+- **Hibernate/JPA**: Data persistence and object-relational mapping.
+- **MySQL**: Relational database.
 
-Git:
-  - **Controle de versões** e colaboração no desenvolvimento.
+**Frontend**:
+- **HTML/CSS/JavaScript**: Building the user interface.
+- **Fetch API**: Asynchronous communication with the backend.
 
-## Requisitos
+**Docker**:
+- **MySQL database container**, configured via Docker Compose.
 
-  - **JDK 21** ou superior.
-  - **Docker** (para o banco de dados).
-  - **Maven** (para gerenciamento do projeto backend).
+**Git**:
+- **Version control** and collaborative development.
 
-## Como Rodar o Projeto
+## Requirements
 
-### 1. Clonar o Repositório
+- **JDK 21** or higher.
+- **Docker** (for the database).
+- **Maven** (for backend project management).
 
-Clone o repositório para sua máquina local:
+## How to Run the Project
+
+### 1. Clone the Repository
+
+Clone the repository to your local machine:
 
 ```bash
 git clone https://github.com/KCR781/Snowman-ERP
@@ -64,25 +64,26 @@ git clone https://github.com/KCR781/Snowman-ERP
 cd Snowman-ERP
 ```
 
-### 2. Configurar o Banco de Dados
+### 2. Set Up the Database
 
-Certifique-se de que o Docker está instalado e ativo. Configure o banco de dados:
+Make sure Docker is installed and running. Then set up the database:
 
 ```bash
 docker-compose up -d
 ```
 
-### 3. Rodar o Backend
+### 3. Run the Backend
 
-Acesse o diretório backend e execute o projeto Spring Boot:
+Go to the backend directory and run the Spring Boot project:
 
 ```bash
 mvn spring-boot:run
 ```
 
-### 4. Abrir o Frontend
+### 4. Open the Frontend
 
-Abra o arquivo index.html localizado na pasta \Snowman-ERP2\src\main\resources\static hospedado em um servidor local via bash.
+Open the `index.html` file located in `\Snowman-ERP2\src\main
+esources\static` in a local server via bash:
 
 ```bash
 start http://localhost:8080/index.html
