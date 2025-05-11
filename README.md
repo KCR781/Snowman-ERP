@@ -1,4 +1,4 @@
-"# Snowman System - User and Admin Management
+# Snowman System - User and Admin Management
 
 > 🇧🇷 Leia este documento em [Português](README.pt-br.md)
 
@@ -109,5 +109,5 @@ Open the `index.html` file located in `\Snowman-ERP2\src\main\resources\static` 
 
 ````bash
 start http://localhost:8080/index.html
-```"
+```
 ````
