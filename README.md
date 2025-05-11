@@ -1,7 +1,6 @@
-> 🇧🇷 Leia este documento em [Português](README.pt-br.md)
-
-
 # Snowman System - User and Admin Management
+
+> 🇧🇷 Leia este documento em [Português](README.pt-br.md)
 
 This project is a web application developed to manage users and administrators (managers). It was implemented using Spring Boot for the backend and HTML/CSS/JavaScript for the frontend, offering basic CRUD (Create, Read, Update, Delete) functionality.
 
@@ -30,18 +29,22 @@ This project is a web application developed to manage users and administrators (
 ## Technologies Used
 
 **Backend**:
+
 - **Spring Boot**: Framework for building REST APIs.
 - **Hibernate/JPA**: Data persistence and object-relational mapping.
 - **MySQL**: Relational database.
 
 **Frontend**:
+
 - **HTML/CSS/JavaScript**: Building the user interface.
 - **Fetch API**: Asynchronous communication with the backend.
 
 **Docker**:
+
 - **MySQL database container**, configured via Docker Compose.
 
 **Git**:
+
 - **Version control** and collaborative development.
 
 ## Requirements
@@ -74,13 +77,21 @@ docker-compose up -d
 
 ### 3. Run the Backend
 
-Go to the backend directory and run the Spring Boot project:
+Package the application as an executable JAR
 
 ```bash
-mvn spring-boot:run
+mvn clean package
 ```
 
-### 4. Open the Frontend
+### 4. Run it in a New Window
+
+After packing it up, execute the following:
+
+```bash
+Start-Process java -ArgumentList "-jar target/Snowman-0.0.1-SNAPSHOT.jar" -RedirectStandardOutput "output.log"
+```
+
+### 5. Open the Frontend
 
 Open the `index.html` file located in `\Snowman-ERP2\src\main
 esources\static` in a local server via bash:
