@@ -17,29 +17,28 @@ import jakarta.persistence.Version;
 public class Manager {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID managerId;
 
-    @Column(name = "username")
+    @Column(nullable = false)
     private String username;
 
-    @Column(name = "email")
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "manager")
     private List<User> users;
 
     @Version
-    private Long version = 0L;
+    private Long version;
 
     public Manager() {
     }
 
-    public Manager(UUID managerId, String username, String email, String password) {
-        this.managerId = managerId;
+    public Manager(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;

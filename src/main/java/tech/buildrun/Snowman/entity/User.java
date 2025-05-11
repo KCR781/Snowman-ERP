@@ -19,18 +19,18 @@ import jakarta.persistence.Version;
 @Entity
 @Table(name = "tb_users")
 public class User {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID userId;
 
-    @Column(name = "username")
+    @Column(nullable = false)
     private String username;
 
-    @Column(name = "email")
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(nullable = false)
     private String password;
 
     @CreationTimestamp
@@ -40,16 +40,8 @@ public class User {
     private Instant updateTimestamp;
 
     @ManyToOne
-    @JoinColumn(name = "manager_Id")
+    @JoinColumn(name = "manager_id", nullable = false)
     private Manager manager;
-
-    public Manager getManager() {
-        return manager;
-    }
-
-    public void setManager(Manager manager) {
-        this.manager = manager;
-    }
 
     @Version
     private Long version;
@@ -57,13 +49,11 @@ public class User {
     public User() {
     }
 
-        public User(UUID userId, String username, String email, String password, Instant creationTimestamp, Instant updateTimestamp) {
-        this.userId = userId;
+    public User(String username, String email, String password, Manager manager) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.creationTimestamp = creationTimestamp;
-        this.updateTimestamp = updateTimestamp;
+        this.manager = manager;
     }
 
     public User(UUID userId, String username, String email, String password, Instant creationTimestamp, Instant updateTimestamp, Long version) {
