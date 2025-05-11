@@ -1,4 +1,4 @@
-# Snowman System - User and Admin Management
+"# Snowman System - User and Admin Management
 
 > 🇧🇷 Leia este documento em [Português](README.pt-br.md)
 
@@ -6,54 +6,66 @@ This project is a web application developed to manage users and administrators (
 
 ## Features
 
-- **User Management**:
-  - Register, edit, and delete users.
-  - Detailed listing of all registered users.
-  - View individual user information.
+* **User Management**:
 
-- **Admin (Manager) Management**:
-  - Register and manage administrators.
-  - Permission control for specific actions like deleting or updating users.
+  * Register, edit, and delete users.
+  * Detailed listing of all registered users.
+  * View individual user information.
 
-- **Action Tracking**:
-  - Logs of actions performed by admins on users, such as updates and deletions.
+* **Admin (Manager) Management**:
 
-- **Database**:
-  - Relational modeling implemented with MySQL.
-  - Relationships between admins and users for action tracking.
+  * Register and manage administrators.
+  * Permission control for specific actions like deleting or updating users.
 
-- **Responsiveness and Usability**:
-  - Functional and user-friendly web interface to interact with the system.
-  - SQL scripts for inserting, updating, and deleting records.
+* **Action Tracking**:
+
+  * Logs of actions performed by admins on users, such as updates and deletions.
+
+* **Database**:
+
+  * Relational modeling implemented with MySQL.
+  * Relationships between admins and users for action tracking.
+
+* **Responsiveness and Usability**:
+
+  * Functional and user-friendly web interface to interact with the system.
+  * SQL scripts for inserting, updating, and deleting records.
 
 ## Technologies Used
 
 **Backend**:
 
-- **Spring Boot**: Framework for building REST APIs.
-- **Hibernate/JPA**: Data persistence and object-relational mapping.
-- **MySQL**: Relational database.
+* **Spring Boot**: Framework for building REST APIs.
+* **Hibernate/JPA**: Data persistence and object-relational mapping.
+* **MySQL**: Relational database.
 
 **Frontend**:
 
-- **HTML/CSS/JavaScript**: Building the user interface.
-- **Fetch API**: Asynchronous communication with the backend.
+* **HTML/CSS/JavaScript**: Building the user interface.
+* **Fetch API**: Asynchronous communication with the backend.
 
 **Docker**:
 
-- **MySQL database container**, configured via Docker Compose.
+* **MySQL database container**, configured via Docker Compose.
 
 **Git**:
 
-- **Version control** and collaborative development.
+* **Version control** and collaborative development.
 
 ## Requirements
 
-- **JDK 21**
-- **Docker** (for the database).
-- **Maven** (for backend project management).
+* **JDK 21** or higher.
+* **Docker** (for the database).
+* **Maven** (for backend project management).
 
 ## How to Run the Project
+
+**Assuming:**
+
+* You're using JDK21
+* You're using CMD as your terminal
+* You have a Docker instance running
+* You have git commands added in your Path
 
 ### 1. Clone the Repository
 
@@ -88,14 +100,14 @@ mvn clean package
 After packing it up, execute the following:
 
 ```bash
-Start-Process java -ArgumentList "-jar target/Snowman-0.0.1-SNAPSHOT.jar" -RedirectStandardOutput "output.log"
+java -jar target/Snowman-0.0.1-SNAPSHOT.jar > output.log
 ```
 
 ### 5. Open the Frontend
 
-Open the `index.html` file located in `\Snowman-ERP2\src\main
-esources\static` in a local server via bash:
+Open the `index.html` file located in `\Snowman-ERP2\src\main\resources\static` or in a local server via bash:
 
-```bash
+````bash
 start http://localhost:8080/index.html
-```
+```"
+````
