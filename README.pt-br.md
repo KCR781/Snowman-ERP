@@ -2,29 +2,29 @@
 
 > 🇺🇸 Leia este documento em [English](README.md)
 
-Este projeto é uma aplicação web desenvolvida para gerenciar usuários e administradores (gerentes). Foi implementado usando Spring Boot para o backend e HTML/CSS/JavaScript para o frontend, oferecendo funcionalidades básicas de CRUD (Criar, Ler, Atualizar, Excluir).
+Este projeto é uma aplicação web desenvolvida para gerenciar usuários e administradores (gerentes). Foi implementado com Spring Boot no backend e HTML/CSS/JavaScript no frontend, oferecendo funcionalidades básicas de CRUD (Criar, Ler, Atualizar, Deletar).
 
 ## Funcionalidades
 
 - **Gerenciamento de Usuários**:
-  - Registrar, editar e excluir usuários.
-  - Listagem detalhada de todos os usuários registrados.
-  - Visualizar informações individuais de usuários.
+  - Cadastrar, editar e excluir usuários.
+  - Listagem detalhada de todos os usuários cadastrados.
+  - Visualizar informações individuais de cada usuário.
 
 - **Gerenciamento de Administradores (Gerentes)**:
-  - Registrar e gerenciar administradores.
-  - Controle de permissões para ações específicas, como excluir ou atualizar usuários.
+  - Cadastrar e gerenciar administradores.
+  - Controle de permissões para ações específicas como exclusão ou atualização de usuários.
 
 - **Rastreamento de Ações**:
-  - Logs de ações realizadas por administradores em usuários, como atualizações e exclusões.
+  - Logs das ações realizadas pelos administradores sobre os usuários, como atualizações e exclusões.
 
 - **Banco de Dados**:
-  - Modelagem relacional implementada com MySQL.
+  - Modelagem relacional com MySQL.
   - Relacionamentos entre administradores e usuários para rastreamento de ações.
 
 - **Responsividade e Usabilidade**:
-  - Interface web funcional e amigável para interagir com o sistema.
-  - Scripts SQL para inserir, atualizar e excluir registros.
+  - Interface web funcional e amigável.
+  - Scripts SQL para inserção, atualização e exclusão de registros.
 
 ## Tecnologias Utilizadas
 
@@ -41,19 +41,25 @@ Este projeto é uma aplicação web desenvolvida para gerenciar usuários e admi
 
 **Docker**:
 
-- **Contêiner para o banco de dados MySQL**, configurado via Docker Compose.
+- **Container do MySQL**, configurado via Docker Compose.
 
 **Git**:
 
-- **Controle de versões** e colaboração no desenvolvimento.
+- **Controle de versão** e desenvolvimento colaborativo.
 
 ## Requisitos
 
 - **JDK 21** ou superior.
 - **Docker** (para o banco de dados).
-- **Maven** (para gerenciamento do projeto backend).
+- **Maven** (para gerenciamento do backend).
 
 ## Como Executar o Projeto
+
+**Pressupostos:**
+- Você está utilizando o JDK 21
+- Está usando o CMD ou PowerShell como terminal
+- Possui o Docker em execução
+- Os comandos do Git estão adicionados ao seu PATH
 
 ### 1. Clone o Repositório
 
@@ -88,7 +94,7 @@ mvn clean package
 Para executar o aplicativo em uma nova janela do PowerShell enquanto mantém o terminal atual livre, use o seguinte comando:
 
 ```powershell
-Start-Process powershell -ArgumentList "java -jar target/Snowman-0.0.1-SNAPSHOT.jar"
+java -jar target/Snowman-0.0.1-SNAPSHOT.jar > output.log
 ```
 
 Isso abrirá uma nova janela do PowerShell e executará o aplicativo lá. Para parar o aplicativo, feche a nova janela.
