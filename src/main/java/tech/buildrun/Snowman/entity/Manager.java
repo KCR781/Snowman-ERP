@@ -45,6 +45,14 @@ public class Manager {
         this.password = password;
     }
 
+    public Manager(UUID managerId, String username, String email, String password, Long version) {
+        this.managerId = managerId;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.version = version;
+    }
+
     public UUID getManagerId() {
         return managerId;
     }

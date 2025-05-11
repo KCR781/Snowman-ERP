@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import tech.buildrun.Snowman.controller.CreateUserDto;
@@ -29,7 +30,8 @@ public class UserService {
                 createUserDto.email(),
                 createUserDto.password(),
                 Instant.now(),
-                null);
+                Instant.now(),
+                0L); // Explicitly set version to 0L
 
         var userSaved = userRepository.save(entity);
 
@@ -49,23 +51,15 @@ public class UserService {
                                UpdateUserDto updateUserDto) {
 
         var id = UUID.fromString(userId);
+        var user = userRepository.findById(id).orElseThrow();
 
-        var userEntity = userRepository.findById(id);
-
-        if (userEntity.isPresent()) {
-            var user = userEntity.get();
-
-            if (updateUserDto.username() != null) {
-                user.setUsername(updateUserDto.username());
-            }
-
-            if (updateUserDto.password() != null) {
-                user.setPassword(updateUserDto.password());
-            }
-
-            userRepository.save(user);
+        if (!user.getVersion().equals(updateUserDto.version())) {
+            throw new OptimisticLockingFailureException("Version mismatch detected for user " + userId);
         }
 
+        user.setUsername(updateUserDto.username());
+        user.setPassword(updateUserDto.password());
+        userRepository.save(user);
     }
 
     public void deleteById(String userId) {
