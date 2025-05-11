@@ -1,10 +1,11 @@
 package tech.buildrun.Snowman.DataLoader;
+import java.util.UUID;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import tech.buildrun.Snowman.entity.User;
 import tech.buildrun.Snowman.repository.UserRepository;
-
-import java.util.UUID;
 
 @Component
 public class UserDataInitializer implements CommandLineRunner {
@@ -16,6 +17,7 @@ public class UserDataInitializer implements CommandLineRunner {
     }
 
     @Override
+    @EventListener(ApplicationReadyEvent.class)
     public void run(String... args) throws Exception {
         if (userRepository.count() == 0) {
             // Inserindo 10 usuários

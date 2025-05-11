@@ -1,12 +1,10 @@
 package tech.buildrun.Snowman.DataLoader;
-
+import java.util.UUID;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import tech.buildrun.Snowman.entity.Manager;
 import tech.buildrun.Snowman.repository.ManagerRepository;
-
-import java.util.UUID;
 
 @Component
 public class ManagerDataInitializer {
