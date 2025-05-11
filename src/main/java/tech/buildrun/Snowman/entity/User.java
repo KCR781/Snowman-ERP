@@ -51,7 +51,7 @@ public class User {
         this.manager = manager;
     }
 
-    @Version // This is the important addition for optimistic locking
+    @Version
     private Long version;
 
     public User() {
