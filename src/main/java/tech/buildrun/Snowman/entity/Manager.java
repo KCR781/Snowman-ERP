@@ -33,7 +33,7 @@ public class Manager {
     private List<User> users;
 
     @Version
-    private Long version;
+    private Long version = 0L;
 
     public Manager() {
     }
