@@ -32,7 +32,7 @@ public class Manager {
     @OneToMany(mappedBy = "manager")
     private List<User> users;
 
-    @Version // Add the version field for optimistic locking
+    @Version
     private Long version;
 
     public Manager() {
