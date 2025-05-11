@@ -107,6 +107,6 @@ java -jar target/Snowman-0.0.1-SNAPSHOT.jar > output.log
 
 Open the `index.html` file located in `\Snowman-ERP2\src\main\resources\static` or in a local server via bash:
 
-````bash
+```bash
 start http://localhost:8080/index.html
 ```
