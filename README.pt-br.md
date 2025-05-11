@@ -1,58 +1,61 @@
-> 🇺🇸 Read this document in [English](README.md)
+# Snowman System - Gerenciamento de Usuários e Administradores
 
-# Sistema Snowman - Gestão de Usuários e Administração
+> 🇺🇸 Leia este documento em [English](README.md)
 
-Este projeto é um sistema web desenvolvido para gerenciar usuários e administradores (managers). Foi implementado com Spring Boot no backend e HTML/CSS/JavaScript no frontend, oferecendo funcionalidades básicas de CRUD (Create, Read, Update, Delete).
+Este projeto é uma aplicação web desenvolvida para gerenciar usuários e administradores (gerentes). Foi implementado usando Spring Boot para o backend e HTML/CSS/JavaScript para o frontend, oferecendo funcionalidades básicas de CRUD (Criar, Ler, Atualizar, Excluir).
+
 ## Funcionalidades
 
-- **Gestão de Usuários**:
-  - Cadastro, edição e exclusão de usuários.
+- **Gerenciamento de Usuários**:
+  - Registrar, editar e excluir usuários.
   - Listagem detalhada de todos os usuários registrados.
-  - Visualização individual de informações do usuário.
+  - Visualizar informações individuais de usuários.
 
-- **Gestão de Administradores (Managers)**:
-  - Cadastro e gerenciamento de administradores.
-  - Controle de permissões para ações específicas, como deletar ou atualizar usuários.
+- **Gerenciamento de Administradores (Gerentes)**:
+  - Registrar e gerenciar administradores.
+  - Controle de permissões para ações específicas, como excluir ou atualizar usuários.
 
-  - **Rastreamento de Ações**:
-        Registro de ações executadas por administradores em usuários, como atualizações e exclusões.
+- **Rastreamento de Ações**:
+  - Logs de ações realizadas por administradores em usuários, como atualizações e exclusões.
 
-  - **Banco de Dados**:
-        Modelagem relacional implementada com MySQL.
-        Relacionamento entre administradores e usuários para ações registradas.
+- **Banco de Dados**:
+  - Modelagem relacional implementada com MySQL.
+  - Relacionamentos entre administradores e usuários para rastreamento de ações.
 
-  - **Responsividade e Usabilidade**:
-    
-    - Interface web funcional e amigável para interagir com o sistema.
-    - Scripts SQL para inserção, atualização e exclusão de registros.
+- **Responsividade e Usabilidade**:
+  - Interface web funcional e amigável para interagir com o sistema.
+  - Scripts SQL para inserir, atualizar e excluir registros.
 
 ## Tecnologias Utilizadas
 
-Backend:
-    
-  - **Spring Boot**: Framework para construção de APIs REST.
-  - **Hibernate/JPA**: Persistência de dados e mapeamento objeto-relacional.
-  - **MySQL**: Banco de dados relacional.
+**Backend**:
 
-Frontend:
-  - **HTML/CSS/JavaScript**: Construção da interface do usuário.
-  - **Fetch API**: Comunicação assíncrona com o backend.
+- **Spring Boot**: Framework para construção de APIs REST.
+- **Hibernate/JPA**: Persistência de dados e mapeamento objeto-relacional.
+- **MySQL**: Banco de dados relacional.
 
-Docker:
-  - **Contêiner para o banco de dados MySQL**, configurado via Docker Compose.
+**Frontend**:
 
-Git:
-  - **Controle de versões** e colaboração no desenvolvimento.
+- **HTML/CSS/JavaScript**: Construção da interface do usuário.
+- **Fetch API**: Comunicação assíncrona com o backend.
+
+**Docker**:
+
+- **Contêiner para o banco de dados MySQL**, configurado via Docker Compose.
+
+**Git**:
+
+- **Controle de versões** e colaboração no desenvolvimento.
 
 ## Requisitos
 
-  - **JDK 21** ou superior.
-  - **Docker** (para o banco de dados).
-  - **Maven** (para gerenciamento do projeto backend).
+- **JDK 21** ou superior.
+- **Docker** (para o banco de dados).
+- **Maven** (para gerenciamento do projeto backend).
 
-## Como Rodar o Projeto
+## Como Executar o Projeto
 
-### 1. Clonar o Repositório
+### 1. Clone o Repositório
 
 Clone o repositório para sua máquina local:
 
@@ -64,25 +67,35 @@ git clone https://github.com/KCR781/Snowman-ERP
 cd Snowman-ERP
 ```
 
-### 2. Configurar o Banco de Dados
+### 2. Configure o Banco de Dados
 
-Certifique-se de que o Docker está instalado e ativo. Configure o banco de dados:
+Certifique-se de que o Docker está instalado e em execução. Em seguida, configure o banco de dados:
 
 ```bash
 docker-compose up -d
 ```
 
-### 3. Rodar o Backend
+### 3. Compile o Backend
 
-Acesse o diretório backend e execute o projeto Spring Boot:
+Empacote a aplicação como um JAR executável:
 
 ```bash
-mvn spring-boot:run
+mvn clean package
 ```
 
-### 4. Abrir o Frontend
+### 4. Execute o Aplicativo em uma Nova Janela
 
-Abra o arquivo index.html localizado na pasta \Snowman-ERP2\src\main\resources\static hospedado em um servidor local via bash.
+Para executar o aplicativo em uma nova janela do PowerShell enquanto mantém o terminal atual livre, use o seguinte comando:
+
+```powershell
+Start-Process powershell -ArgumentList "java -jar target/Snowman-0.0.1-SNAPSHOT.jar"
+```
+
+Isso abrirá uma nova janela do PowerShell e executará o aplicativo lá. Para parar o aplicativo, feche a nova janela.
+
+### 5. Abra o Frontend
+
+Abra o arquivo `index.html` localizado em `\Snowman-ERP\src\main\resources\static` em um servidor local via bash:
 
 ```bash
 start http://localhost:8080/index.html

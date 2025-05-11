@@ -1,0 +1,45 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.5)
+
+2025-05-11T17:10:54.163-03:00  INFO 18664 --- [           main] tech.buildrun.Snowman.Snowman            : Starting Snowman v0.0.1-SNAPSHOT using Java 21.0.7 with PID 18664 (C:\Users\Kauã\OneDrive\Área de Trabalho\Snowman-ERP\target\Snowman-0.0.1-SNAPSHOT.jar started by Kauã in C:\Users\Kauã\OneDrive\Área de Trabalho\Snowman-ERP)
+2025-05-11T17:10:54.167-03:00  INFO 18664 --- [           main] tech.buildrun.Snowman.Snowman            : No active profile set, falling back to 1 default profile: "default"
+2025-05-11T17:10:55.456-03:00  INFO 18664 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-11T17:10:55.550-03:00  INFO 18664 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 76 ms. Found 2 JPA repository interfaces.
+2025-05-11T17:10:56.385-03:00  INFO 18664 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-11T17:10:56.403-03:00  INFO 18664 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-11T17:10:56.404-03:00  INFO 18664 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-11T17:10:56.442-03:00  INFO 18664 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-11T17:10:56.443-03:00  INFO 18664 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2203 ms
+2025-05-11T17:10:56.827-03:00  INFO 18664 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-11T17:10:56.930-03:00  INFO 18664 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-11T17:10:56.984-03:00  INFO 18664 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-11T17:10:57.410-03:00  INFO 18664 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-11T17:10:57.501-03:00  INFO 18664 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-11T17:10:58.035-03:00  INFO 18664 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a345298
+2025-05-11T17:10:58.038-03:00  INFO 18664 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-11T17:10:58.131-03:00  INFO 18664 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 9.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-11T17:10:59.088-03:00  INFO 18664 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-11T17:10:59.165-03:00  INFO 18664 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-11T17:10:59.629-03:00  WARN 18664 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-11T17:10:59.658-03:00  INFO 18664 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-05-11T17:11:00.027-03:00  INFO 18664 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-11T17:11:00.044-03:00  INFO 18664 --- [           main] tech.buildrun.Snowman.Snowman            : Started Snowman in 6.747 seconds (process running for 7.591)
+Hibernate: select count(*) from tb_managers m1_0
+Hibernate: select count(*) from tb_users u1_0
+2025-05-11T17:11:09.344-03:00  INFO 18664 --- [nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-11T17:11:09.344-03:00  INFO 18664 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-11T17:11:09.346-03:00  INFO 18664 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
