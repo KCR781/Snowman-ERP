@@ -49,7 +49,7 @@ This project is a web application developed to manage users and administrators (
 
 ## Requirements
 
-- **JDK 21** or higher.
+- **JDK 21**
 - **Docker** (for the database).
 - **Maven** (for backend project management).
 
