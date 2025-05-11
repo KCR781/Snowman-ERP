@@ -57,13 +57,23 @@ public class User {
     public User() {
     }
 
-    public User(UUID userId, String username, String email, String password, Instant creationTimestamp, Instant updateTimestamp) {
+        public User(UUID userId, String username, String email, String password, Instant creationTimestamp, Instant updateTimestamp) {
         this.userId = userId;
         this.username = username;
         this.email = email;
         this.password = password;
         this.creationTimestamp = creationTimestamp;
         this.updateTimestamp = updateTimestamp;
+    }
+
+    public User(UUID userId, String username, String email, String password, Instant creationTimestamp, Instant updateTimestamp, Long version) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.creationTimestamp = creationTimestamp;
+        this.updateTimestamp = updateTimestamp;
+        this.version = version;
     }
 
     public UUID getUserId() {

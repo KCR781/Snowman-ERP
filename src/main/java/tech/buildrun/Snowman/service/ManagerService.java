@@ -1,12 +1,14 @@
 package tech.buildrun.Snowman.service;
 
+import java.util.UUID;
+
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
+
 import tech.buildrun.Snowman.entity.Manager;
 import tech.buildrun.Snowman.entity.User;
 import tech.buildrun.Snowman.repository.ManagerRepository;
 import tech.buildrun.Snowman.repository.UserRepository;
-
-import java.util.UUID;
 
 @Service
 public class ManagerService {
@@ -20,6 +22,7 @@ public class ManagerService {
     }
 
     public UUID createManager(Manager manager) {
+        manager.setVersion(0L); // Explicitly set version to 0L
         var savedManager = managerRepository.save(manager);
         return savedManager.getManagerId();
     }
@@ -32,6 +35,11 @@ public class ManagerService {
 
     public void updateUser(UUID userId, User updatedUser) {
         var user = userRepository.findById(userId).orElseThrow();
+
+        if (!user.getVersion().equals(updatedUser.getVersion())) {
+            throw new OptimisticLockingFailureException("Version mismatch detected for user " + userId);
+        }
+
         user.setUsername(updatedUser.getUsername());
         user.setPassword(updatedUser.getPassword());
         userRepository.save(user);

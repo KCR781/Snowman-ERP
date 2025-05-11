@@ -27,16 +27,29 @@ public class ManagerDataInitializer {
             if (managerRepository.count() == 0) {
                 logger.info("No managers found. Initializing manager data...");
 
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager1", "manager1@example.com", "password1"));
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager2", "manager2@example.com", "password2"));
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager3", "manager3@example.com", "password3"));
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager4", "manager4@example.com", "password4"));
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager5", "manager5@example.com", "password5"));
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager6", "manager6@example.com", "password6"));
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager7", "manager7@example.com", "password7"));
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager8", "manager8@example.com", "password8"));
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager9", "manager9@example.com", "password9"));
-                managerRepository.save(new Manager(UUID.randomUUID(), "manager10", "manager10@example.com", "password10"));
+                for (Manager manager : new Manager[]{
+                    new Manager(UUID.randomUUID(), "manager1", "manager1@example.com", "password1"),
+                    new Manager(UUID.randomUUID(), "manager2", "manager2@example.com", "password2"),
+                    new Manager(UUID.randomUUID(), "manager3", "manager3@example.com", "password3"),
+                    new Manager(UUID.randomUUID(), "manager4", "manager4@example.com", "password4"),
+                    new Manager(UUID.randomUUID(), "manager5", "manager5@example.com", "password5"),
+                    new Manager(UUID.randomUUID(), "manager6", "manager6@example.com", "password6"),
+                    new Manager(UUID.randomUUID(), "manager7", "manager7@example.com", "password7"),
+                    new Manager(UUID.randomUUID(), "manager8", "manager8@example.com", "password8"),
+                    new Manager(UUID.randomUUID(), "manager9", "manager9@example.com", "password9"),
+                    new Manager(UUID.randomUUID(), "manager10", "manager10@example.com", "password10")
+                }) {
+                    managerRepository.findById(manager.getManagerId()).ifPresentOrElse(
+                        existingManager -> {
+                            if (!existingManager.getVersion().equals(manager.getVersion())) {
+                                logger.warn("Version mismatch for Manager with ID " + manager.getManagerId() + ". Skipping initialization.");
+                            } else {
+                                logger.info("Manager with ID " + manager.getManagerId() + " already exists with matching version. Skipping initialization.");
+                            }
+                        },
+                        () -> managerRepository.save(manager)
+                    );
+                }
 
                 logger.info("Manager data initialized successfully.");
             }
