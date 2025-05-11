@@ -52,7 +52,7 @@ public class User {
     }
 
     @Version
-    private Long version = 0L;
+    private Long version;
 
     public User() {
     }
