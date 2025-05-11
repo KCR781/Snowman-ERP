@@ -94,7 +94,7 @@ mvn clean package
 Para executar o aplicativo em uma nova janela do PowerShell enquanto mantém o terminal atual livre, use o seguinte comando:
 
 ```powershell
-java -jar target/Snowman-0.0.1-SNAPSHOT.jar > output.log
+start "SnowmanApp" cmd /k java -jar target\Snowman-0.0.1-SNAPSHOT.jar > output.log
 ```
 
 Isso abrirá uma nova janela do PowerShell e executará o aplicativo lá. Para parar o aplicativo, feche a nova janela.
