@@ -100,7 +100,7 @@ mvn clean package
 After packing it up, execute the following:
 
 ```bash
-java -jar target/Snowman-0.0.1-SNAPSHOT.jar > output.log
+start "SnowmanApp" cmd /k java -jar target\Snowman-0.0.1-SNAPSHOT.jar > output.log
 ```
 
 ### 5. Open the Frontend
