@@ -1,0 +1,11 @@
+#edit-modal {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+}
