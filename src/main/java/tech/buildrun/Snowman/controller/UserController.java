@@ -1,7 +1,8 @@
 package tech.buildrun.Snowman.controller;
-import java.net.URI;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tech.buildrun.Snowman.DTOs.CreateUserDto;
+import tech.buildrun.Snowman.DTOs.UpdateUserDto;
+import tech.buildrun.Snowman.entity.Manager;
 import tech.buildrun.Snowman.entity.User;
+import tech.buildrun.Snowman.repository.UserRepository;
+import tech.buildrun.Snowman.service.ManagerService;
 import tech.buildrun.Snowman.service.UserService;
 
 @RestController
@@ -21,20 +27,28 @@ import tech.buildrun.Snowman.service.UserService;
 public class UserController {
 
     private final UserService userService;
+    private final ManagerService managerService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ManagerService managerService, UserRepository userRepository) {
         this.userService = userService;
+        this.managerService = managerService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody CreateUserDto createUserDto) {
-        String userId = userService.createUser(createUserDto).toString();
-
-        return ResponseEntity.created(URI.create("/v1/users/" + userId)).build();
+    public ResponseEntity<UUID> createUser(@RequestBody CreateUserDto dto) {
+        UUID managerId = dto.managerId();
+        Manager manager = managerService.findById(managerId);
+        if (manager == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        UUID createdUserId = userService.createUser(dto, manager);
+        return ResponseEntity.ok(createdUserId);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable String userId) {
+    public ResponseEntity<User> getUserById(@PathVariable UUID userId) {
         Optional<User> user = userService.getUserById(userId);
 
         if (user.isPresent()) {
@@ -52,14 +66,21 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<Void> updateUserById(@PathVariable String userId,
-                                               @RequestBody UpdateUserDto updateUserDto) {
-        userService.updateUserById(userId, updateUserDto);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<User> updateUser(
+        @PathVariable UUID userId, @RequestBody UpdateUserDto dto) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        User user = userOpt.get();
+        user.setUsername(dto.username());
+        if (dto.password() != null) {
+            user.setPassword(dto.password());
+        }
+        return ResponseEntity.ok(userRepository.save(user));
     }
-
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteById(@PathVariable String userId) {
+    public ResponseEntity<Void> deleteById(@PathVariable UUID userId) {
         userService.deleteById(userId);
         return ResponseEntity.noContent().build();
     }

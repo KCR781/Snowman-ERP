@@ -2,7 +2,7 @@
 
 > 🇧🇷 Leia este documento em [Português](README.pt-br.md)
 
-This project is a web application developed to manage users and administrators (managers). It was implemented using Spring Boot for the backend and HTML/CSS/JavaScript for the frontend, offering basic CRUD (Create, Read, Update, Delete) functionality.
+Este projeto é uma aplicação web para gerenciar usuários e administradores (managers), implementado com Spring Boot no backend e HTML/CSS/JavaScript no frontend, oferecendo funcionalidades básicas de CRUD (Create, Read, Update, Delete).
 
 ## Features
 
@@ -44,10 +44,6 @@ This project is a web application developed to manage users and administrators (
 * **HTML/CSS/JavaScript**: Building the user interface.
 * **Fetch API**: Asynchronous communication with the backend.
 
-**Docker**:
-
-* **MySQL database container**, configured via Docker Compose.
-
 **Git**:
 
 * **Version control** and collaborative development.
@@ -55,7 +51,7 @@ This project is a web application developed to manage users and administrators (
 ## Requirements
 
 * **JDK 21** or higher.
-* **Docker** (for the database).
+* **MySQL** (running locally).
 * **Maven** (for backend project management).
 
 ## How to Run the Project
@@ -64,7 +60,7 @@ This project is a web application developed to manage users and administrators (
 
 * You're using JDK21
 * You're using CMD as your terminal
-* You have a Docker instance running
+* You have MySQL running locally
 * You have git commands added in your Path
 
 ### 1. Clone the Repository
@@ -79,13 +75,9 @@ git clone https://github.com/KCR781/Snowman-ERP
 cd Snowman-ERP
 ```
 
-### 2. Set Up the Database
+### 2. Configure the Database
 
-Make sure Docker is installed and running. Then set up the database:
-
-```bash
-docker-compose up -d
-```
+Certifique-se de que o MySQL está instalado e em execução localmente. Crie o banco de dados `snowman_db` e execute o script SQL em `db/dump_snowman.sql` para popular as tabelas.
 
 ### 3. Run the Backend
 
@@ -105,7 +97,7 @@ start "SnowmanApp" cmd /k java -jar target\Snowman-0.0.1-SNAPSHOT.jar > output.l
 
 ### 5. Open the Frontend
 
-Open the `index.html` file located in `\Snowman-ERP2\src\main\resources\static` or in a local server via bash:
+Abra o arquivo `index.html` localizado em `\Snowman-ERP\src\main\resources\static` ou em um servidor local via bash:
 
 ```bash
 start http://localhost:8080/index.html

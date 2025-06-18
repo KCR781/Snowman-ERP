@@ -2,9 +2,12 @@ package tech.buildrun.Snowman.service;
 
 import java.util.UUID;
 
-import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityNotFoundException;
+import tech.buildrun.Snowman.DTOs.CreateUserDto;
+import tech.buildrun.Snowman.DTOs.UpdateUserDto;
 import tech.buildrun.Snowman.entity.Manager;
 import tech.buildrun.Snowman.entity.User;
 import tech.buildrun.Snowman.repository.ManagerRepository;
@@ -27,21 +30,42 @@ public class ManagerService {
         return savedManager.getManagerId();
     }
 
+    public User createUser(UUID managerId, CreateUserDto dto) {
+    Manager manager = managerRepository.findById(managerId)
+        .orElseThrow(() -> new EntityNotFoundException("Manager não encontrado"));
+    
+    User user = new User(dto.username(), dto.email(), dto.password(), manager);
+    return userRepository.save(user);
+}
+
+
     public void deleteUserById(UUID userId) {
         if (userRepository.existsById(userId)) {
             userRepository.deleteById(userId);
         }
     }
 
-    public void updateUser(UUID userId, User updatedUser) {
-        var user = userRepository.findById(userId).orElseThrow();
+    @Transactional
+    public User updateUser(UUID managerId, UUID userId, UpdateUserDto dto) {
+        Manager manager = managerRepository.findById(managerId)
+            .orElseThrow(() -> new EntityNotFoundException("Manager não encontrado"));
 
-        if (!user.getVersion().equals(updatedUser.getVersion())) {
-            throw new OptimisticLockingFailureException("Version mismatch detected for user " + userId);
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new EntityNotFoundException("User não encontrado para id " + userId));
+
+        if (!user.getManager().getManagerId().equals(managerId)) {
+            throw new IllegalArgumentException("User não pertence ao manager com id " + managerId);
         }
 
-        user.setUsername(updatedUser.getUsername());
-        user.setPassword(updatedUser.getPassword());
-        userRepository.save(user);
+        user.setUsername(dto.username());
+        user.setEmail(dto.email());
+        user.setPassword(dto.password());
+        
+        return userRepository.save(user);
     }
+
+public Manager findById(UUID managerId) {
+    return managerRepository.findById(managerId)
+        .orElseThrow(() -> new EntityNotFoundException("Manager não encontrado para id " + managerId));
+}
 }

@@ -3,10 +3,15 @@ package tech.buildrun.Snowman.entity;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.type.SqlTypes;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -17,7 +22,10 @@ import jakarta.persistence.Version;
 public class Manager {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    @UuidGenerator
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    @Column(columnDefinition="CHAR(36)", name = "manager_id", updatable = false, nullable = false, length = 36)
     private UUID managerId;
 
     @Column(nullable = false)
@@ -30,6 +38,7 @@ public class Manager {
     private String password;
 
     @OneToMany(mappedBy = "manager")
+    @JsonManagedReference
     private List<User> users;
 
     @Version
