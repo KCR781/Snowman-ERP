@@ -7,8 +7,9 @@ import java.util.UUID;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
-import tech.buildrun.Snowman.controller.CreateUserDto;
-import tech.buildrun.Snowman.controller.UpdateUserDto;
+import tech.buildrun.Snowman.DTOs.CreateUserDto;
+import tech.buildrun.Snowman.DTOs.UpdateUserDto;
+import tech.buildrun.Snowman.entity.Manager;
 import tech.buildrun.Snowman.entity.User;
 import tech.buildrun.Snowman.repository.UserRepository;
 
@@ -21,37 +22,34 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UUID createUser(CreateUserDto createUserDto) {
+    public UUID createUser(CreateUserDto dto, Manager manager) {
 
-        // DTO -> ENTITY
-        var entity = new User(
-                UUID.randomUUID(),
-                createUserDto.username(),
-                createUserDto.email(),
-                createUserDto.password(),
+                var entity = new User(
+                dto.username(),
+                dto.email(),
+                dto.password(),
+                manager,
                 Instant.now(),
                 Instant.now(),
-                0L); // Explicitly set version to 0L
+                0L);
 
         var userSaved = userRepository.save(entity);
-
         return userSaved.getUserId();
     }
 
-    public Optional<User> getUserById(String userId) {
+    public Optional<User> getUserById(UUID userId) {
 
-        return userRepository.findById(UUID.fromString(userId));
+        return userRepository.findById(userId);
     }
 
     public List<User> listUsers() {
         return userRepository.findAll();
     }
 
-    public void updateUserById(String userId,
+    public void updateUserById(UUID userId,
                                UpdateUserDto updateUserDto) {
 
-        var id = UUID.fromString(userId);
-        var user = userRepository.findById(id).orElseThrow();
+        var user = userRepository.findById(userId).orElseThrow();
 
         if (!user.getVersion().equals(updateUserDto.version())) {
             throw new OptimisticLockingFailureException("Version mismatch detected for user " + userId);
@@ -62,14 +60,12 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteById(String userId) {
+    public void deleteById(UUID userId) {
 
-        var id = UUID.fromString(userId);
-
-        var userExists = userRepository.existsById(id);
+        var userExists = userRepository.existsById(userId);
 
         if (userExists) {
-            userRepository.deleteById(id);
+            userRepository.deleteById(userId);
         }
     }
 }

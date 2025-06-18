@@ -39,10 +39,6 @@ Este projeto é uma aplicação web desenvolvida para gerenciar usuários e admi
 - **HTML/CSS/JavaScript**: Construção da interface do usuário.
 - **Fetch API**: Comunicação assíncrona com o backend.
 
-**Docker**:
-
-- **Container do MySQL**, configurado via Docker Compose.
-
 **Git**:
 
 - **Controle de versão** e desenvolvimento colaborativo.
@@ -50,7 +46,7 @@ Este projeto é uma aplicação web desenvolvida para gerenciar usuários e admi
 ## Requisitos
 
 - **JDK 21** ou superior.
-- **Docker** (para o banco de dados).
+- **MySQL** (rodando localmente).
 - **Maven** (para gerenciamento do backend).
 
 ## Como Executar o Projeto
@@ -58,7 +54,7 @@ Este projeto é uma aplicação web desenvolvida para gerenciar usuários e admi
 **Pressupostos:**
 - Você está utilizando o JDK 21
 - Está usando o CMD ou PowerShell como terminal
-- Possui o Docker em execução
+- Possui o MySQL rodando localmente
 - Os comandos do Git estão adicionados ao seu PATH
 
 ### 1. Clone o Repositório
@@ -75,11 +71,7 @@ cd Snowman-ERP
 
 ### 2. Configure o Banco de Dados
 
-Certifique-se de que o Docker está instalado e em execução. Em seguida, configure o banco de dados:
-
-```bash
-docker-compose up -d
-```
+Certifique-se de que o MySQL está instalado e em execução localmente. Crie o banco de dados `snowman_db` e execute o script SQL em `db/dump_snowman.sql` para popular as tabelas.
 
 ### 3. Compile o Backend
 

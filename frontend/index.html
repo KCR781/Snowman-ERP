@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de Usuários</title>
+    <style>
+        #edit-modal {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Usuários</h1>
+    <table border="1" id="users-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="users-body">
+            <!-- usuários vão aqui -->
+        </tbody>
+    </table>
+
+    <h2>Criar Novo Usuário</h2>
+    <form id="create-form">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <input type="text" id="managerId" placeholder="Manager ID" required>
+        <button type="submit">Criar</button>
+    </form>
+
+    <!-- Edit User Modal -->
+    <div id="edit-modal">
+        <h2>Editar Usuário</h2>
+        <form id="edit-form">
+            <input type="hidden" id="edit-user-id">
+            <input type="hidden" id="edit-user-version">
+            <label>
+                Username:
+                <input type="text" id="edit-username" required>
+            </label>
+            <br>
+            <label>
+                Email:
+                <input type="email" id="edit-email" required>
+            </label>
+            <br>
+            <label>
+                Nova Senha:
+                <input type="password" id="edit-password" placeholder="Deixe vazio para manter a atual">
+            </label>
+            <br>
+            <button type="submit">Salvar</button>
+            <button type="button" onclick="closeEditModal()">Cancelar</button>
+        </form>
+    </div>
+
+    <script>
+        // Configuração da API
+        const config = {
+            apiBaseUrl: 'http://localhost:8080/v1/users'
+        };
+        const api = config.apiBaseUrl;
+
+        function loadUsers() {
+            fetch(api)
+                .then(res => res.json())
+                .then(users => {
+                    const tbody = document.getElementById('users-body');
+                    tbody.innerHTML = '';
+                    users.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${user.username}</td>
+                            <td>${user.email}</td>
+                            <td>
+                                <button onclick="deleteUser('${user.userId}')">Excluir</button>
+                                <button onclick="editUser('${user.userId}', '${user.username}', '${user.email}', ${user.version !== undefined ? user.version : 0})">Editar</button>
+                            </td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                });
+        }
+
+        document.getElementById('create-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                managerId: document.getElementById('managerId').value
+            };
+            fetch(api, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.text().then(msg => { throw new Error(msg); });
+                }
+                return res.json();
+            })
+        .then(() => {
+            loadUsers();
+        })
+        .catch(err => alert(`Erro ao criar usuário: ${err.message || err}`));
+        });
+
+        function deleteUser(id) {
+            fetch(`${api}/${id}`, { method: 'DELETE' })
+                .then(() => loadUsers())
+                .catch(err => alert(`Erro ao excluir usuário: ${err.message || err}`));
+        }
+
+        function editUser(id, currentUsername, currentEmail, currentVersion) {
+            document.getElementById('edit-user-id').value = id;
+            document.getElementById('edit-username').value = currentUsername;
+            document.getElementById('edit-email').value = currentEmail;
+            document.getElementById('edit-user-version').value = currentVersion || 0;
+            document.getElementById('edit-password').value = '';
+            document.getElementById('edit-modal').style.display = 'block';
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').style.display = 'none';
+        }
+
+        document.getElementById('edit-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const id = document.getElementById('edit-user-id').value;
+            const username = document.getElementById('edit-username').value;
+            const email = document.getElementById('edit-email').value;
+            const password = document.getElementById('edit-password').value;
+            const version = parseInt(document.getElementById('edit-user-version').value, 10) || 0;
+
+            if (username && email) {
+                const bodyData = {
+                    username,
+                    email,
+                    version
+                };
+                if (password) {
+                    bodyData.password = password;
+                }
+
+                fetch(`${api}/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bodyData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => Promise.reject(err));
+                    }
+                    return response.json();
+                })
+                .then(() => {
+                    closeEditModal();
+                    loadUsers();
+                })
+                .catch(err => alert(`Erro ao editar usuário: ${err.message || err}`));
+            } else {
+                alert('Usuário e email são obrigatórios.');
+            }
+        });
+        loadUsers();
+    </script>
+</body>
+</html>

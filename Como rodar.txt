@@ -1,0 +1,8 @@
+o projeto que eu fiz em sala foi o spring-boot-rest api Kauã, com a nota 2
+o projeto Kauã Arrumado foi o que eu fiz em 20 minutos ao chegar em casa...
+
+
+mvn clean install
+
+F5 no arquivo SpringBoot3RestApiExampleApplication.java em \Kauã Arrumado\src\main\java\com\bezkoder\spring\restapi
+
