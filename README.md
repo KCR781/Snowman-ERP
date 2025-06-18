@@ -55,6 +55,8 @@ Clone the repository to your local machine:
 
 ```bash
 git clone https://github.com/KCR781/Snowman-ERP
+```
+```bash
 cd Snowman-ERP
 ```
 
