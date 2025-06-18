@@ -63,15 +63,15 @@ Clone o repositório para sua máquina local:
 
 ```bash
 git clone https://github.com/KCR781/Snowman-ERP
+```
+
+```bash
 cd Snowman-ERP
 ```
 
 ### 2. Configure o Banco de Dados
 
-Certifique-se de que o MySQL está instalado e em execução localmente. Crie o banco de dados `snowman_db` e execute os scripts nesta ordem:
-
-1. `docs/script.sql` (cria tabelas e procedures)
-2. `docs/Mock data.sql` (insere dados de exemplo)
+Certifique-se de que o MySQL está instalado e em execução localmente. Crie o banco de dados `snowman_db` e execute o script SQL em `db/dump_snowman.sql` para popular as tabelas.
 
 ### 3. Compile o Backend
 
@@ -93,8 +93,8 @@ Isso abrirá uma nova janela do PowerShell e executará o aplicativo lá. Para p
 
 ### 5. Abra o Frontend
 
-Abra o arquivo `frontend/index.html` no seu navegador ou utilize um servidor local.
+Abra o arquivo `index.html` localizado em `\Snowman-ERP\src\main\resources\static` em um servidor local via bash:
 
----
-
-Em caso de dúvidas, consulte a documentação ou abra uma issue.
+```bash
+start http://localhost:8080/index.html
+```
