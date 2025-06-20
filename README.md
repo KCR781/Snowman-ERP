@@ -1,57 +1,57 @@
-# Snowman System - User and Admin Management
+# Snowman System - Gerenciamento de Usuários e Administradores
 
-> 🇧🇷 Leia este documento em [Português](README.pt-br.md)
+> 🇺🇸 Read this document in [English](README.em-us.md)
 
-This project is a web application for managing users and administrators (managers), implemented with Spring Boot on the backend and HTML/CSS/JavaScript on the frontend, offering basic CRUD (Create, Read, Update, Delete) functionalities.
+Este projeto é uma aplicação web para gerenciar usuários e administradores (gerentes), implementado com Spring Boot no backend e HTML/CSS/JavaScript no frontend, oferecendo funcionalidades básicas de CRUD (Criar, Ler, Atualizar, Deletar).
 
-## Features
+## Funcionalidades
 
-- **User Management**:
-  - Register, edit, and delete users.
-  - Detailed listing of all registered users.
-  - View individual user information.
-- **Admin (Manager) Management**:
-  - Register and manage administrators.
-  - Permission control for specific actions like deleting or updating users.
-- **Action Tracking**:
-  - Logs of actions performed by admins on users, such as updates and deletions.
-- **Database**:
-  - Relational modeling implemented with MySQL.
-  - Relationships between admins and users for action tracking.
-- **Responsiveness and Usability**:
-  - Functional and user-friendly web interface to interact with the system.
-  - SQL scripts for inserting, updating, and deleting records.
+- **Gerenciamento de Usuários**:
+  - Cadastrar, editar e excluir usuários.
+  - Listagem detalhada de todos os usuários cadastrados.
+  - Visualizar informações individuais de cada usuário.
+- **Gerenciamento de Administradores (Gerentes)**:
+  - Cadastrar e gerenciar administradores.
+  - Controle de permissões para ações específicas como exclusão ou atualização de usuários.
+- **Rastreamento de Ações**:
+  - Logs das ações realizadas pelos administradores sobre os usuários, como atualizações e exclusões.
+- **Banco de Dados**:
+  - Modelagem relacional com MySQL.
+  - Relacionamentos entre administradores e usuários para rastreamento de ações.
+- **Responsividade e Usabilidade**:
+  - Interface web funcional e amigável.
+  - Scripts SQL para inserção, atualização e exclusão de registros.
 
-## Technologies Used
+## Tecnologias Utilizadas
 
 **Backend**:
-- **Spring Boot**: Framework for building REST APIs.
-- **Hibernate/JPA**: Data persistence and object-relational mapping.
-- **MySQL**: Relational database.
+- **Spring Boot**: Framework para construção de APIs REST.
+- **Hibernate/JPA**: Persistência de dados e mapeamento objeto-relacional.
+- **MySQL**: Banco de dados relacional.
 
 **Frontend**:
-- **HTML/CSS/JavaScript**: Building the user interface.
-- **Fetch API**: Asynchronous communication with the backend.
+- **HTML/CSS/JavaScript**: Construção da interface do usuário.
+- **Fetch API**: Comunicação assíncrona com o backend.
 
 **Git**:
-- **Version control** and collaborative development.
+- **Controle de versão** e desenvolvimento colaborativo.
 
-## Requirements
-- **JDK 21** or higher
-- **MySQL** (running locally)
-- **Maven** (for backend project management)
+## Requisitos
+- **JDK 21** ou superior
+- **MySQL** (rodando localmente)
+- **Maven** (para gerenciamento do backend)
 
-## How to Run the Project
+## Como Executar o Projeto
 
-**Assumptions:**
-- You are using JDK 21
-- You are using CMD or PowerShell as your terminal
-- You have MySQL running locally
-- Git commands are added to your PATH
+**Pressupostos:**
+- Você está utilizando o JDK 21
+- Está usando o CMD ou PowerShell como terminal
+- Possui o MySQL rodando localmente
+- Os comandos do Git estão adicionados ao seu PATH
 
-### 1. Clone the Repository
+### 1. Clone o Repositório
 
-Clone the repository to your local machine:
+Clone o repositório para sua máquina local:
 
 ```bash
 git clone https://github.com/KCR781/Snowman-ERP
@@ -60,29 +60,29 @@ git clone https://github.com/KCR781/Snowman-ERP
 cd Snowman-ERP
 ```
 
-### 2. Configure the Database
+### 2. Configure o Banco de Dados
 
-Make sure MySQL is installed and running locally. Create the database `snowman_db` and run the following scripts in order:
+Certifique-se de que o MySQL está instalado e em execução localmente. Crie o banco de dados `snowman_db` e execute os seguintes scripts na ordem:
 
-1. `docs/script.sql` (creates tables and procedures)
-2. `docs/Mock data.sql` (inserts initial data)
+1. `docs/script.sql` (criação das tabelas e procedures)
+2. `docs/Mock data.sql` (inserção de dados iniciais)
 
-### 3. Run the Backend
+### 3. Compile o Backend
 
-Package the application as an executable JAR:
+Empacote a aplicação como um JAR executável:
 
 ```bash
 mvn clean package
 ```
 
-### 4. Run it in a New Window
+### 4. Execute o Aplicativo em uma Nova Janela
 
-After packaging, execute:
+Para executar o aplicativo em uma nova janela do PowerShell enquanto mantém o terminal atual livre, use o comando:
 
 ```powershell
 start "SnowmanApp" cmd /k java -jar target\Snowman-0.0.1-SNAPSHOT.jar > output.log
 ```
 
-### 5. Open the Frontend
+### 5. Abra o Frontend
 
-Open the file `frontend/index.html` in your browser or use a local server.
+Abra o arquivo `frontend/index.html` no seu navegador ou utilize um servidor local.
