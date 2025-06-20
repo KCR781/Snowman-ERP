@@ -1,6 +1,6 @@
 # Snowman System - Gerenciamento de Usuários e Administradores
 
-> 🇺🇸 Read this document in [English](README.em-us.md)
+> 🇺🇸 Read this document in [English](README.en-us.md)
 
 Este projeto é uma aplicação web para gerenciar usuários e administradores (gerentes), implementado com Spring Boot no backend e HTML/CSS/JavaScript no frontend, oferecendo funcionalidades básicas de CRUD (Criar, Ler, Atualizar, Deletar).
 
