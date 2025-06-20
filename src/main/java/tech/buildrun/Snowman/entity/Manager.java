@@ -44,6 +44,7 @@ public class Manager {
     @Version
     private Long version;
 
+    // [...] Constructors, getters, e setters
     public Manager() {
     }
 
