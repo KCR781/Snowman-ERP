@@ -37,14 +37,21 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UUID> createUser(@RequestBody CreateUserDto dto) {
-        UUID managerId = dto.managerId();
-        Manager manager = managerService.findById(managerId);
-        if (manager == null) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<?> createUser(@RequestBody CreateUserDto dto) {
+        try {
+            UUID managerId = dto.managerId();
+            if (managerId == null) {
+                return ResponseEntity.badRequest().body("managerId não pode ser nulo ou vazio");
+            }
+            Manager manager = managerService.findById(managerId);
+            if (manager == null) {
+                return ResponseEntity.badRequest().body("Manager não encontrado para o ID informado");
+            }
+            UUID createdUserId = userService.createUser(dto, manager);
+            return ResponseEntity.ok(createdUserId);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao criar usuário: " + e.getMessage());
         }
-        UUID createdUserId = userService.createUser(dto, manager);
-        return ResponseEntity.ok(createdUserId);
     }
 
     @GetMapping("/{userId}")

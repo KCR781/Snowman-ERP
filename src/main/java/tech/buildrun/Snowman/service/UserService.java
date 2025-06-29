@@ -1,5 +1,4 @@
 package tech.buildrun.Snowman.service;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,14 +23,13 @@ public class UserService {
 
     public UUID createUser(CreateUserDto dto, Manager manager) {
 
-                var entity = new User(
-                dto.username(),
-                dto.email(),
-                dto.password(),
-                manager,
-                Instant.now(),
-                Instant.now(),
-                0L);
+
+        var entity = new User(
+            dto.username(),
+            dto.email(),
+            dto.password(),
+            manager
+        );
 
         var userSaved = userRepository.save(entity);
         return userSaved.getUserId();

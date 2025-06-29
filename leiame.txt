@@ -1,0 +1,5 @@
+para logar no banco: 
+
+JDBC URL: jdbc:h2:file:./data/snowman
+User Name: sa
+Password:

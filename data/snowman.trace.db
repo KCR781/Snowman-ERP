@@ -1,0 +1,18 @@
+2025-06-29 14:02:05.891722-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TRIGGER trg_insert_pessoa_audit AFTER INSERT ON tb_pessoas FOR EACH ROW [*]BEGIN ATOMIC INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao, timestamp) VALUES (NEW.pessoa_id, NEW.tipo, 'INSERT', CURRENT_TIMESTAMP())"; expected "QUEUE, NOWAIT, AS, CALL"; SQL statement:
+CREATE TRIGGER trg_insert_pessoa_audit AFTER INSERT ON tb_pessoas FOR EACH ROW BEGIN ATOMIC INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao, timestamp) VALUES (NEW.pessoa_id, NEW.tipo, 'INSERT', CURRENT_TIMESTAMP()) [42001-232]
+2025-06-29 14:02:05.904721-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]END"; SQL statement:
+END [42000-232]
+2025-06-29 14:02:05.907721-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TRIGGER trg_update_pessoa_audit AFTER UPDATE ON tb_pessoas FOR EACH ROW [*]BEGIN ATOMIC INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao, timestamp) VALUES (NEW.pessoa_id, NEW.tipo, 'UPDATE', CURRENT_TIMESTAMP())"; expected "QUEUE, NOWAIT, AS, CALL"; SQL statement:
+CREATE TRIGGER trg_update_pessoa_audit AFTER UPDATE ON tb_pessoas FOR EACH ROW BEGIN ATOMIC INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao, timestamp) VALUES (NEW.pessoa_id, NEW.tipo, 'UPDATE', CURRENT_TIMESTAMP()) [42001-232]
+2025-06-29 14:02:05.911721-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]END"; SQL statement:
+END [42000-232]
+2025-06-29 14:02:05.915722-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TRIGGER trg_delete_pessoa_audit AFTER DELETE ON tb_pessoas FOR EACH ROW [*]BEGIN ATOMIC INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao, timestamp) VALUES (OLD.pessoa_id, OLD.tipo, 'DELETE', CURRENT_TIMESTAMP())"; expected "QUEUE, NOWAIT, AS, CALL"; SQL statement:
+CREATE TRIGGER trg_delete_pessoa_audit AFTER DELETE ON tb_pessoas FOR EACH ROW BEGIN ATOMIC INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao, timestamp) VALUES (OLD.pessoa_id, OLD.tipo, 'DELETE', CURRENT_TIMESTAMP()) [42001-232]
+2025-06-29 14:02:05.919722-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]END"; SQL statement:
+END [42000-232]

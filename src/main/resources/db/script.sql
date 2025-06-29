@@ -1,15 +1,9 @@
-CREATE DATABASE IF NOT EXISTS snowman;
-USE snowman;
-
-SET FOREIGN_KEY_CHECKS = 0;
-
+-- Removido comandos MySQL incompatíveis com H2
 DROP TABLE IF EXISTS tb_user_audit;
 DROP TABLE IF EXISTS tb_users;
 DROP TABLE IF EXISTS tb_managers;
 DROP TABLE IF EXISTS tb_pessoa_audit;
 DROP TABLE IF EXISTS tb_pessoas;
-
-SET FOREIGN_KEY_CHECKS = 1;
 
 -- ===============================
 -- TABELA DE GERENTES
@@ -45,23 +39,19 @@ CREATE TABLE tb_pessoas (
   email VARCHAR(255) UNIQUE NOT NULL,
   username VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  tipo ENUM('USER', 'MANAGER') NOT NULL,
+  tipo VARCHAR(20) NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ===============================
 -- PROCEDURE: Contar usuários por gerente
 -- ===============================
-DELIMITER //
-CREATE PROCEDURE sp_count_users_by_manager()
-BEGIN
-  SELECT m.username AS gerente, COUNT(u.user_id) AS total_usuarios
-  FROM tb_managers m
-  LEFT JOIN tb_users u ON m.manager_id = u.manager_id
-  GROUP BY m.username;
-END;
-//
-DELIMITER ;
+
+CREATE VIEW vw_count_users_by_manager AS
+SELECT m.username AS gerente, COUNT(u.user_id) AS total_usuarios
+FROM tb_managers m
+LEFT JOIN tb_users u ON m.manager_id = u.manager_id
+GROUP BY m.username;
 
 -- ===============================
 -- TABELA DE AUDITORIA DE USUÁRIOS
@@ -86,43 +76,29 @@ CREATE TABLE tb_pessoa_audit (
 );
 
 -- ===============================
--- TRIGGERS DE AUDITORIA
+-- TRIGGERS DE AUDITORIA 
 -- ===============================
-DELIMITER //
 
-CREATE TRIGGER trg_user_insert_audit
-AFTER INSERT ON tb_users
-FOR EACH ROW
-BEGIN
-  INSERT INTO tb_user_audit(user_email, user_id, action_type)
-  VALUES (NEW.email, NEW.user_id, 'INSERT');
-END;
-
-CREATE TRIGGER trg_insert_pessoa
+CREATE TRIGGER trg_insert_pessoa_audit
 AFTER INSERT ON tb_pessoas
 FOR EACH ROW
-BEGIN
-  INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao)
-  VALUES (NEW.pessoa_id, NEW.tipo, 'INSERT');
+BEGIN ATOMIC
+  INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao, timestamp)
+  VALUES (NEW.pessoa_id, NEW.tipo, 'INSERT', CURRENT_TIMESTAMP());
 END;
 
-CREATE TRIGGER trg_user_update_audit
-AFTER UPDATE ON tb_users
+CREATE TRIGGER trg_update_pessoa_audit
+AFTER UPDATE ON tb_pessoas
 FOR EACH ROW
-BEGIN
-  INSERT INTO tb_user_audit(user_email, user_id, action_type)
-  VALUES (NEW.email, NEW.user_id, 'UPDATE');
+BEGIN ATOMIC
+  INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao, timestamp)
+  VALUES (NEW.pessoa_id, NEW.tipo, 'UPDATE', CURRENT_TIMESTAMP());
 END;
 
-CREATE TRIGGER trg_user_delete_audit
-AFTER DELETE ON tb_users
+CREATE TRIGGER trg_delete_pessoa_audit
+AFTER DELETE ON tb_pessoas
 FOR EACH ROW
-BEGIN
-  INSERT INTO tb_user_audit(user_email, user_id, action_type)
-  VALUES (OLD.email, OLD.user_id, 'DELETE');
+BEGIN ATOMIC
+  INSERT INTO tb_pessoa_audit (pessoa_id, tipo, acao, timestamp)
+  VALUES (OLD.pessoa_id, OLD.tipo, 'DELETE', CURRENT_TIMESTAMP());
 END;
-
-//
-DELIMITER ;
-
--- CALL sp_count_users_by_manager(); 

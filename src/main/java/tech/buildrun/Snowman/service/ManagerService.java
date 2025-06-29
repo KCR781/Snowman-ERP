@@ -47,6 +47,7 @@ public class ManagerService {
 
     @Transactional
     public User updateUser(UUID managerId, UUID userId, UpdateUserDto dto) {
+        @SuppressWarnings("unused")
         Manager manager = managerRepository.findById(managerId)
             .orElseThrow(() -> new EntityNotFoundException("Manager não encontrado"));
 
