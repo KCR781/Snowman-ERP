@@ -49,7 +49,6 @@ public class PessoaAuditListener {
             audit.setTimestamp(Instant.now());
             pessoaAuditRepository.save(audit);
         } catch (Exception e) {
-            // log error
         }
     }
 }
