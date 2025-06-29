@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS snowman;
+USE snowman;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -25,10 +27,10 @@ CREATE TABLE tb_managers (
 -- ===============================
 CREATE TABLE tb_users (
   user_id CHAR(36) PRIMARY KEY,
-  creation_timestamp DATETIME(6),
+  creation_timestamp DATETIME,
   email VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
-  update_timestamp DATETIME(6),
+  update_timestamp DATETIME,
   username VARCHAR(255) NOT NULL,
   version BIGINT DEFAULT 0,
   manager_id CHAR(36),
@@ -47,8 +49,6 @@ CREATE TABLE tb_pessoas (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-
-
 -- ===============================
 -- PROCEDURE: Contar usuários por gerente
 -- ===============================
@@ -62,8 +62,6 @@ BEGIN
 END;
 //
 DELIMITER ;
-
-CALL sp_count_users_by_manager();
 
 -- ===============================
 -- TABELA DE AUDITORIA DE USUÁRIOS
@@ -88,9 +86,10 @@ CREATE TABLE tb_pessoa_audit (
 );
 
 -- ===============================
--- TRIGGER: Auditoria de inserção
+-- TRIGGERS DE AUDITORIA
 -- ===============================
 DELIMITER //
+
 CREATE TRIGGER trg_user_insert_audit
 AFTER INSERT ON tb_users
 FOR EACH ROW
@@ -107,9 +106,6 @@ BEGIN
   VALUES (NEW.pessoa_id, NEW.tipo, 'INSERT');
 END;
 
--- ===============================
--- TRIGGER: Auditoria de atualização
--- ===============================
 CREATE TRIGGER trg_user_update_audit
 AFTER UPDATE ON tb_users
 FOR EACH ROW
@@ -118,9 +114,6 @@ BEGIN
   VALUES (NEW.email, NEW.user_id, 'UPDATE');
 END;
 
--- ===============================
--- TRIGGER: Auditoria de exclusão
--- ===============================
 CREATE TRIGGER trg_user_delete_audit
 AFTER DELETE ON tb_users
 FOR EACH ROW
@@ -128,5 +121,8 @@ BEGIN
   INSERT INTO tb_user_audit(user_email, user_id, action_type)
   VALUES (OLD.email, OLD.user_id, 'DELETE');
 END;
+
 //
 DELIMITER ;
+
+-- CALL sp_count_users_by_manager(); 
