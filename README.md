@@ -1,88 +1,106 @@
-# Snowman System - Gerenciamento de Usuários e Administradores
+
+# Snowman-ERP — Sistema de Gerenciamento de Usuários e Administradores
 
 > 🇺🇸 Read this document in [English](README.en-us.md)
 
-Este projeto é uma aplicação web para gerenciar usuários e administradores (gerentes), implementado com Spring Boot no backend e HTML/CSS/JavaScript no frontend, oferecendo funcionalidades básicas de CRUD (Criar, Ler, Atualizar, Deletar).
+Snowman-ERP é uma aplicação web para gerenciamento de usuários e administradores (gerentes), desenvolvida com **Spring Boot** no backend e **HTML/CSS/JavaScript** no frontend. O sistema oferece funcionalidades completas de CRUD, controle de permissões, rastreamento de ações e interface amigável.
 
-## Funcionalidades
+## Funcionalidades Principais
 
-- **Gerenciamento de Usuários**:
-  - Cadastrar, editar e excluir usuários.
-  - Listagem detalhada de todos os usuários cadastrados.
-  - Visualizar informações individuais de cada usuário.
-- **Gerenciamento de Administradores (Gerentes)**:
-  - Cadastrar e gerenciar administradores.
-  - Controle de permissões para ações específicas como exclusão ou atualização de usuários.
-- **Rastreamento de Ações**:
-  - Logs das ações realizadas pelos administradores sobre os usuários, como atualizações e exclusões.
-- **Banco de Dados**:
-  - Modelagem relacional com MySQL.
-  - Relacionamentos entre administradores e usuários para rastreamento de ações.
-- **Responsividade e Usabilidade**:
-  - Interface web funcional e amigável.
-  - Scripts SQL para inserção, atualização e exclusão de registros.
+- **Gerenciamento de Usuários:**
+  - Cadastrar, editar, listar e excluir usuários.
+  - Visualizar detalhes individuais de cada usuário.
+- **Gerenciamento de Administradores (Gerentes):**
+  - Cadastrar, editar e excluir administradores.
+  - Gerenciar permissões para ações sensíveis (exclusão/atualização de usuários).
+- **Rastreamento de Ações:**
+  - Logs detalhados das ações dos administradores sobre os usuários (atualizações, exclusões etc).
+- **Banco de Dados:**
+  - Modelagem relacional (MySQL ou H2 para testes).
+  - Relacionamento entre administradores e usuários para rastreabilidade.
+- **Interface Web Responsiva:**
+  - Frontend simples e funcional para interação com o sistema.
+  - Scripts SQL para criação e popularização do banco.
+
+## Endpoints REST (Principais)
+
+Veja o arquivo `leiame.txt` para exemplos detalhados de uso dos endpoints.
+
+- **Usuários:**
+  - `POST /v1/users` — Cria usuário (com managerId)
+  - `GET /v1/users` — Lista todos os usuários
+  - `GET /v1/users/{userId}` — Busca usuário por ID
+  - `PUT /v1/users/{userId}` — Atualiza usuário
+  - `DELETE /v1/users/{userId}` — Remove usuário
+- **Gerentes:**
+  - `GET /v1/managers/manager/{id}` — Busca gerente por ID
+  - `POST /v1/managers/{managerId}/users` — Cria usuário vinculado ao gerente
+  - `DELETE /v1/managers/users/{userId}` — Remove usuário via gerente
 
 ## Tecnologias Utilizadas
 
-**Backend**:
-- **Spring Boot**: Framework para construção de APIs REST.
-- **Hibernate/JPA**: Persistência de dados e mapeamento objeto-relacional.
-- **MySQL**: Banco de dados relacional.
+**Backend:**
+- Spring Boot (REST API)
+- Hibernate/JPA
+- MySQL (produção) / H2 (testes)
 
-**Frontend**:
-- **HTML/CSS/JavaScript**: Construção da interface do usuário.
-- **Fetch API**: Comunicação assíncrona com o backend.
+**Frontend:**
+- HTML, CSS, JavaScript (Fetch API)
 
-**Git**:
-- **Controle de versão** e desenvolvimento colaborativo.
+**Outros:**
+- Git (controle de versão)
+- Maven (gerenciamento de dependências)
 
 ## Requisitos
-- **JDK 21** ou superior
-- **MySQL** (rodando localmente)
-- **Maven** (para gerenciamento do backend)
+- JDK 21 ou superior
+- MySQL rodando localmente (ou H2 para testes)
+- Maven
 
 ## Como Executar o Projeto
+
+**Pré-requisitos:**
+- JDK 21 instalado
+- MySQL em execução local (ou use H2 para testes)
+- Git e Maven configurados no PATH
+
+### 1. Clone o Repositório
+
+```bash
+git clone https://github.com/KCR781/Snowman-ERP
+cd Snowman-ERP
+```
+
+### 2. Execute o Aplicativo
+
+Você pode executar o aplicativo facilmente utilizando o script `iniciar.bat` já incluso no projeto. Este script:
+- Acessa a pasta `target`
+- Executa o JAR compilado (`Snowman-0.0.1-SNAPSHOT.jar`)
+- Aguarda alguns segundos
+- Abre automaticamente o sistema no navegador (`http://localhost:8080/`)
+- Abre o console do H2 (`http://localhost:8080/h2-console`)
+
+**Para rodar:**
+
+```bat
+iniciar.bat
+```
+
+> Alternativamente, você pode executar manualmente o JAR conforme instruções anteriores, mas o script facilita o processo.
+
+### 3. Acesse o Frontend
+
+O frontend será aberto automaticamente pelo script, mas você também pode acessar manualmente:
+- `src/main/resources/static/index.html` (abrindo no navegador)
+- Ou utilize um servidor local de sua preferência
+
+---
+
+**Observações:**
+- O projeto não depende mais de Docker (veja `REMOVIDO_DOCKER.md`).
+- Para exemplos de uso dos endpoints e detalhes de autenticação/acesso ao banco H2, consulte o arquivo `leiame.txt`.
 
 **Pressupostos:**
 - Você está utilizando o JDK 21
 - Está usando o CMD ou PowerShell como terminal
 - Possui o MySQL rodando localmente
 - Os comandos do Git estão adicionados ao seu PATH
-
-### 1. Clone o Repositório
-
-Clone o repositório para sua máquina local:
-
-```bash
-git clone https://github.com/KCR781/Snowman-ERP
-```
-```bash
-cd Snowman-ERP
-```
-
-### 2. Configure o Banco de Dados
-
-Certifique-se de que o MySQL está instalado e em execução localmente. Crie o banco de dados `snowman_db` e execute os seguintes scripts na ordem:
-
-1. `docs/script.sql` (criação das tabelas e procedures)
-2. `docs/Mock data.sql` (inserção de dados iniciais)
-
-### 3. Compile o Backend
-
-Empacote a aplicação como um JAR executável:
-
-```bash
-mvn clean package
-```
-
-### 4. Execute o Aplicativo em uma Nova Janela
-
-Para executar o aplicativo em uma nova janela do PowerShell enquanto mantém o terminal atual livre, use o comando:
-
-```powershell
-start "SnowmanApp" cmd /k java -jar target\Snowman-0.0.1-SNAPSHOT.jar > output.log
-```
-
-### 5. Abra o Frontend
-
-Abra o arquivo `frontend/index.html` no seu navegador ou utilize um servidor local.
