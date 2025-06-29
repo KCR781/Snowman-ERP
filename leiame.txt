@@ -3,3 +3,97 @@ para logar no banco:
 JDBC URL: jdbc:h2:file:./data/snowman
 User Name: sa
 Password:
+
+
+Endpoints:
+
+Gerente:
+
+Buscar Gerente por ID:
+
+Endpoint: GET /v1/managers/manager/{id}
+
+    Variável de Caminho: id (Tipo: UUID do gerente)
+
+    Resposta: JSON do gerente
+
+Criar Usuário Vinculado a um Gerente:
+
+Endpoint: POST /v1/managers/{managerId}/users
+
+    Variável de Caminho: managerId (Tipo: UUID do gerente)
+
+    Corpo da Requisição:
+    JSON
+
+    {
+      "username": "nome",
+      "email": "email@exemplo.com",
+      "password": "senha123"
+    }
+
+    Resposta: JSON do usuário criado com status 201 Created.
+
+Deletar Usuário (via Gerente):
+
+Endpoint: DELETE /v1/managers/users/{userId}
+
+    Variável de Caminho: userId (Tipo: UUID do usuário)
+
+    Resposta: 204 No Content (sem conteúdo) em caso de exclusão bem-sucedida.
+
+Usuários:
+
+Criar Usuário (via DTO com managerId):
+
+ Endpoint: POST /v1/users
+
+    Corpo da Requisição:
+    JSON
+
+    {
+      "username": "nome",
+      "email": "email@exemplo.com",
+      "password": "senha123",
+      "managerId": "UUID do manager"
+    }
+
+    Resposta: O UUID do usuário criado (200 OK) ou uma mensagem de erro (400 Bad Request ou 500 Internal Server Error).
+
+Buscar Usuário por ID:
+
+Endpoint: GET /v1/users/{userId}
+
+    Variável de Caminho: userId (Tipo: UUID do usuário)
+
+    Resposta: JSON do usuário (200 OK) ou 404 Not Found (não encontrado) se o usuário não existir.
+
+Listar Todos os Usuários:
+
+Endpoint: GET /v1/users
+
+    Resposta: Um array JSON de todos os usuários (200 OK).
+
+Atualizar Usuário:
+
+Endpoint: PUT /v1/users/{userId}
+
+    Variável de Caminho: userId (Tipo: UUID do usuário)
+
+    Corpo da Requisição:
+    JSON
+
+    {
+      "username": "novo_nome",
+      "password": "nova_senha" // Opcional: omita se não for alterar a senha
+    }
+
+    Resposta: JSON do usuário atualizado (200 OK) ou 404 Not Found (não encontrado) se o usuário não existir.
+
+Deletar Usuário:
+
+Endpoint: DELETE /v1/users/{userId}
+
+    Variável de Caminho: userId (Tipo: UUID do usuário)
+
+    Resposta: 204 No Content (sem conteúdo) em caso de exclusão bem-sucedida.
